@@ -1,0 +1,9 @@
+---
+applications:
+- name: registers-selfservice
+  memory: 256MB
+  instances: 1
+  buildpack: ruby_buildpack
+  services:
+    # postgres database
+    - registers-selfservice

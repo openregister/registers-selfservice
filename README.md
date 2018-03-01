@@ -1,6 +1,12 @@
 # Register selfservice
 Portal where users generate an API Key to use GOV.UK Registers
 
+```bash
+  $ bundle
+  $ rake db:setup
+  $ rails s
+```
+
 ## Licence
 
 Unless stated otherwise, the codebase is released under [the MIT licence](./LICENSE).
