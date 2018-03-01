@@ -14,8 +14,11 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'haml-rails'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+# GDS Frontend Toolkit, templates and elements
+gem 'govuk_elements_form_builder', github: 'ministryofjustice/govuk_elements_form_builder'
+gem 'govuk_elements_rails'
+gem 'govuk_frontend_toolkit'
+gem 'govuk_template'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

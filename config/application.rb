@@ -27,5 +27,8 @@ module RegistersSelfservice
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Use GovukElementsFormBuilder
+    ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
   end
 end

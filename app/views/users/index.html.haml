@@ -1,23 +1,19 @@
-%h1 Users
+%main#content{role: 'main'}
+  .grid-row
+    .column-full
+      %h1.heading-large Users
 
-%table
-  %thead
-    %tr
-      %th Email
-      %th Service
-      %th Department
-      %th UUID
-      %th{colspan: "3"}
-  %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.email
-        %td= user.service
-        %td= user.department
-        %td= user.uuid
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
-
-%p
-  = link_to 'New User', new_user_path
+      %table.table-collapsible.user-table
+        %thead
+          %tr
+            %th Email
+            %th Department
+            %th Service
+            %th{colspan: "3"}
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td= user.email
+              %td= user.department
+              %td= user.service
+              %td= link_to 'View UUID', user_path(user)

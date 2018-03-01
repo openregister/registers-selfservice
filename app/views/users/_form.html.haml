@@ -1,20 +1,7 @@
-= form_with(model: user, local: true) do |form|
-  - if user.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(user.errors.count, "error")
-        prohibited this user from being saved:
-      %ul
-        - user.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = form.label :email
-    = form.text_field :email, id: :user_email
-  .field
-    = form.label :service
-    = form.text_field :service, id: :user_service
-  .field
-    = form.label :department
-    = form.text_field :department, id: :user_department
-  .actions
-    = form.submit
+= form_for @user do |f|
+  = f.text_field :email, label_options: { class: 'form-label-bold' }
+  = f.text_field :department, label_options: { class: 'form-label-bold' }
+  = f.text_field :service, label_options: { class: 'form-label-bold' }
+  - if f.object.uuid.present?
+    = f.text_field :uuid, label_options: { class: 'form-label-bold' }, disabled: true
+  = f.submit 'Continue', class: 'button'

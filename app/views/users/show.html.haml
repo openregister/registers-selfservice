@@ -1,17 +1,14 @@
-%p#notice= notice
-%p
-  %strong Email:
-  = @user.email
-%p
-  %strong Service:
-  = @user.service
-%p
-  %strong Department:
-  = @user.department
-%p
-  %strong UUID:
-  = @user.uuid
+%main#content{role: 'main'}
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large Your API Key
 
-= link_to 'Edit', edit_user_path(@user)
-|
-= link_to 'Back', users_path
+      %code.code.code-large
+        = @user.uuid
+
+      .notice
+        %i.icon.icon-important
+          %span.visually-hidden Warning
+        %strong.bold-small You must copy your API Key now. You will not be able to see if again once you leave this page
+
+      %p= link_to 'Back to register collection', 'https://registers.cloudapps.digital/registers'
