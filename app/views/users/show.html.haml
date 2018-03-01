@@ -1,0 +1,17 @@
+%p#notice= notice
+%p
+  %strong Email:
+  = @user.email
+%p
+  %strong Service:
+  = @user.service
+%p
+  %strong Department:
+  = @user.department
+%p
+  %strong UUID:
+  = @user.uuid
+
+= link_to 'Edit', edit_user_path(@user)
+|
+= link_to 'Back', users_path
