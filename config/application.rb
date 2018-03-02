@@ -30,5 +30,8 @@ module RegistersSelfservice
 
     # Use GovukElementsFormBuilder
     ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
+
+    # Use GovukNotify
+    ActionMailer::Base.add_delivery_method :govuk_notify, GovukNotifyRails::Delivery, api_key: ENV['GOVUK_NOTIFY_API_KEY']
   end
 end

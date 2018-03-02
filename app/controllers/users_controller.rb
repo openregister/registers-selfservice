@@ -19,6 +19,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       redirect_to @user, notice: 'User was successfully created.'
+      NotifyMailer.api_key_confirmation(@user).deliver_now
+      NotifyMailer.new_api_key_request(@user).deliver_now
     else
       render :new
     end
