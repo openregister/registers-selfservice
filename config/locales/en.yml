@@ -4,7 +4,7 @@ en:
       user:
         email: Email address
         department: Organisation
-        uuid: UUID
+        api_key: API Key
     hint:
       user:
         department: The organisation or government department you work for
