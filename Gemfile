@@ -10,15 +10,10 @@ ruby File.read(".ruby-version").chomp
 gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'haml-rails'
+gem 'active_model_serializers'
 
-# GDS Frontend Toolkit, templates and elements
-gem 'govuk_elements_form_builder', github: 'ministryofjustice/govuk_elements_form_builder'
-gem 'govuk_elements_rails'
-gem 'govuk_frontend_toolkit'
-gem 'govuk_template'
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+gem 'rack-cors'
 
 # Email and Text Notifications
 gem 'govuk_notify_rails'

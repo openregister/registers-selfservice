@@ -3,13 +3,13 @@ require_relative 'boot'
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
-require "active_job/railtie"
+# require "active_job/railtie"
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
-require "action_view/railtie"
-require "action_cable/engine"
-require "sprockets/railtie"
+# require "action_view/railtie"
+# require "action_cable/engine"
+# require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -27,9 +27,6 @@ module RegistersSelfservice
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-
-    # Use GovukElementsFormBuilder
-    ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
 
     # Use GovukNotify
     ActionMailer::Base.add_delivery_method :govuk_notify, GovukNotifyRails::Delivery, api_key: ENV['GOVUK_NOTIFY_API_KEY']
