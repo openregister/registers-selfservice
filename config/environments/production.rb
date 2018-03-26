@@ -80,4 +80,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Add Google Sheets configuration
+  config.spreadsheet_id = '1M8kXcbfDCgk1s1SRZMvt2r3nzjUCphbbgCpSMYz4Rh8'
+  config.spreadsheet_range = 'Sheet1!A2:C'
 end
