@@ -10,40 +10,40 @@ class UsersController < ApplicationController
     render json: @user
   end
 
-  def new
-    @user = User.new
-  end
-
   def create
     @user = User.new(user_params)
+
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
-      NotifyMailer.api_key_confirmation(@user).deliver_now
-      NotifyMailer.new_api_key_request(@user).deliver_now
+      NotifyMailer.api_key_confirmation(@user).deliver_later
+      NotifyMailer.new_api_key_request(@user).deliver_later
+      render json: @user, status: :created, location: @user
     else
-      render :new
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      render json: @user, status: :ok
+      head :no_content
     else
-      render :edit
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
     @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+    head :no_content
   end
 
   private
     def set_user
       @user = User.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "User not found" }, status: :not_found
     end
 
     def user_params
-      params.require(:user).permit(:email, :service, :department, :api_key)
+      params.permit(:email, :service, :department, :api_key)
     end
 end
