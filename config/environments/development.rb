@@ -44,8 +44,4 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-
-  # Add Google Sheets configuration
-  config.spreadsheet_id = '1t5bbuSmDtRueSyD-8X1i3aX3E9t1uWv48n4mk28akGE'
-  config.spreadsheet_range = 'Sheet1!A2:C'
 end
