@@ -1,7 +1,0 @@
-= form_for @user do |f|
-  = f.text_field :email, label_options: { class: 'form-label-bold' }
-  = f.text_field :department, label_options: { class: 'form-label-bold' }
-  = f.text_field :service, label_options: { class: 'form-label-bold' }
-  - if f.object.api_key.present?
-    = f.text_field :api_key, label_options: { class: 'form-label-bold' }, disabled: true
-  = f.submit 'Continue', class: 'button'
