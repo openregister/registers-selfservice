@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -e
+
+APP_NAME=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); puts config['applications'][0]['name']")
+
+# $CF env variables are set by Travis and configured in ../.travis.yml
+cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
+
+echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
+# Zero downtime push comes from "Autopilot" which is installed in before_deploy
+# step in Travis
+cf zero-downtime-push $APP_NAME -f manifest.yml
+cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
