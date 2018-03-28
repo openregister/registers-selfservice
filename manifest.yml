@@ -7,3 +7,5 @@ applications:
   services:
     # postgres database
     - registers-selfservice
+    # environment variables
+    - registers-selfservice-secrets

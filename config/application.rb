@@ -28,6 +28,13 @@ module RegistersSelfservice
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    if ENV.key?('VCAP_SERVICES')
+      cups_env = CF::App::Credentials.find_by_service_name('registers-selfservice-secrets')
+      if cups_env.present?
+        cups_env.each { |k, v| ENV[k] = v }
+      end
+    end
+
     # Use GovukNotify
     ActionMailer::Base.add_delivery_method :govuk_notify, GovukNotifyRails::Delivery, api_key: ENV['GOVUK_NOTIFY_API_KEY']
   end
