@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: %i[show update destroy]
 
   def index
     @users = User.all
@@ -36,14 +36,15 @@ class UsersController < ApplicationController
     head :no_content
   end
 
-  private
-    def set_user
-      @user = User.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-        render json: { error: "User not found" }, status: :not_found
-    end
+private
 
-    def user_params
-      params.permit(:email, :service, :department, :api_key)
-    end
+  def set_user
+    @user = User.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "User not found" }, status: :not_found
+  end
+
+  def user_params
+    params.permit(:email, :service, :department, :api_key)
+  end
 end

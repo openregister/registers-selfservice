@@ -23,6 +23,8 @@ group :development, :test do
   gem 'pry-byebug'
 
   gem 'rspec-rails', '~> 3.5'
+
+  gem 'govuk-lint', github: 'openregister/govuk-lint', branch: 'bump-rubocop-version'
 end
 
 group :development do

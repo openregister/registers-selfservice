@@ -1,10 +1,9 @@
 class User < ApplicationRecord
-
   before_save :set_api_key
 
   validates :email, presence: true
 
-  private
+private
 
   def set_api_key
     if self.api_key.blank?
