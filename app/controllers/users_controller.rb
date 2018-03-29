@@ -1,14 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
-
-  def index
-    @users = User.all
-    render json: @users
-  end
-
-  def show
-    render json: @user
-  end
+  before_action :set_user, only: %i[update destroy]
 
   def create
     @user = User.new(user_params)
@@ -18,7 +9,7 @@ class UsersController < ApplicationController
       NotifyMailer.new_api_key_request(@user).deliver_later
       #TODO Mock out Google Auth for end-to-end tests
       AnalyticsUpdateService.new.add_new_service(@user[:api_key], @user[:department], @user[:service]) unless Rails.env.test?
-      render json: @user, status: :created, location: @user
+      render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
