@@ -5,8 +5,8 @@ require 'base64'
 class AnalyticsUpdateService
   def initialize
     authorization = Google::Auth::ServiceAccountCredentials.make_creds(
-        json_key_io: StringIO.new(Base64.decode64(Rails.application.secrets.google_api_key)),
-        scope: [Google::Apis::SheetsV4::AUTH_SPREADSHEETS, Google::Apis::AnalyticsV3::AUTH_ANALYTICS]
+      json_key_io: StringIO.new(Base64.decode64(Rails.application.secrets.google_api_key)),
+      scope: [Google::Apis::SheetsV4::AUTH_SPREADSHEETS, Google::Apis::AnalyticsV3::AUTH_ANALYTICS]
     )
 
     @service = Google::Apis::SheetsV4::SheetsService.new
