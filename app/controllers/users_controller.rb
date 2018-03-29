@@ -1,14 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
-
-  def index
-    @users = User.all
-    render json: @users
-  end
-
-  def show
-    render json: @user
-  end
+  before_action :set_user, only: %i[update destroy]
 
   def create
     @user = User.new(user_params)
@@ -16,7 +7,7 @@ class UsersController < ApplicationController
     if @user.save
       NotifyMailer.api_key_confirmation(@user).deliver_later
       NotifyMailer.new_api_key_request(@user).deliver_later
-      render json: @user, status: :created, location: @user
+      render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end

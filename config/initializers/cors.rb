@@ -1,8 +1,8 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://registers.cloudapps.digital'
+    origins Rails.configuration.registers_frontend_host
     resource '*',
       headers: :any,
-      methods: %i(get post put patch delete options head)
+      methods: %i(post options head)
   end
 end
