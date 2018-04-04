@@ -28,7 +28,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.5'
 
-  gem 'govuk-lint', github: 'openregister/govuk-lint', branch: 'bump-rubocop-version'
+  gem 'govuk-lint', github: 'alphagov/govuk-lint', branch: 'master'
 end
 
 group :development do
