@@ -30,7 +30,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.5'
 
-  gem 'govuk-lint', github: 'alphagov/govuk-lint', branch: 'master'
+  gem 'govuk-lint', '~> 3.8'
 end
 
 group :development do
