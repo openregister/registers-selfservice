@@ -15,7 +15,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
     set_personalisation(
       email: user.email,
       api_key: user.api_key,
-      department: user.department,
+      department: user.department_name,
       service: user.service
     )
 
