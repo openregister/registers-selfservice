@@ -2,6 +2,7 @@ require 'register_client_manager'
 
 class User < ApplicationRecord
   before_save :set_api_key
+  nilify_blanks
 
   validates :email, presence: true
 
@@ -12,7 +13,7 @@ class User < ApplicationRecord
       record = register_data.get_records.find { |r| department == r.entry.key }
       record.item.value['name']
     else
-      ""
+      nil
     end
   end
 

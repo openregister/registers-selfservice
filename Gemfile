@@ -23,6 +23,7 @@ gem 'govuk_notify_rails'
 gem 'cf-app-utils'
 
 gem 'govuk-registers-api-client', '~> 1.0'
+gem 'nilify_blanks', '~> 1.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
