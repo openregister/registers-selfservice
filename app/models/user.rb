@@ -12,8 +12,6 @@ class User < ApplicationRecord
       register_data = registers_client.get_register('government-organisation', 'beta')
       record = register_data.get_records.find { |r| department == r.entry.key }
       record.item.value['name']
-    else
-      nil
     end
   end
 
