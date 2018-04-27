@@ -13,7 +13,9 @@ class AnalyticsUpdateService
     @service.authorization = authorization
   end
 
-  def add_new_service(api_key, department = 'Not available', service = 'Not available', options = { spreadsheet_id: Rails.application.secrets.spreadsheet_id, range: Rails.application.secrets.spreadsheet_range })
+  def add_new_service(api_key, department, service, options = { spreadsheet_id: Rails.application.secrets.spreadsheet_id, range: Rails.application.secrets.spreadsheet_range })
+    department ||= '(not set)'
+    service ||= '(not set)'
     value_range = Google::Apis::SheetsV4::ValueRange.new(values: [[api_key, department, service]])
     @service.append_spreadsheet_value(options[:spreadsheet_id], options[:range], value_range, value_input_option: 'RAW')
   end
