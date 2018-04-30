@@ -1,11 +1,1 @@
 en:
-  helpers:
-    label:
-      user:
-        email: Email address
-        department: Organisation
-        api_key: API Key
-    hint:
-      user:
-        department: The organisation or government department you work for
-        service: What website or service will use registers
