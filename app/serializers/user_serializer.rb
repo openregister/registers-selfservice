@@ -1,3 +1,3 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :email, :service, :department, :api_key, :is_government
+  attributes :email, :non_gov_use_category, :department, :api_key, :is_government
 end

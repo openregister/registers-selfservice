@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
-    service { Faker::Company.name }
+    non_gov_use_category 'Personal'
     department { Faker::Company.name }
   end
 end

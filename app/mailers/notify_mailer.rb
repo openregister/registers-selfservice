@@ -16,7 +16,7 @@ class NotifyMailer < GovukNotifyRails::Mailer
       email: user.email,
       api_key: user.api_key,
       department: user.department_name,
-      service: user.service
+      non_gov_use_category: user.non_gov_use_category
     )
 
     mail(to: 'registerteam@digital.cabinet-office.gov.uk')
