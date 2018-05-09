@@ -3,11 +3,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      NotifyMailer.api_key_confirmation(@user).deliver_later
-      NotifyMailer.new_api_key_request(@user).deliver_later
       #TODO Mock out Google Auth for end-to-end tests
       AnalyticsUpdateService.new.add_new_service(@user[:api_key], @user.department_name, @user[:non_gov_use_category], @user[:is_government]) unless Rails.env.test?
       render json: @user, status: :created
+      NotifyMailer.api_key_confirmation(@user).deliver_later
+      NotifyMailer.new_api_key_request(@user).deliver_later
     else
       render json: @user.errors, status: :unprocessable_entity
     end
