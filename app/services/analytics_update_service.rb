@@ -15,7 +15,7 @@ class AnalyticsUpdateService
 
   def add_new_service(api_key, department, non_gov_use_category, is_government, options = { spreadsheet_id: Rails.application.secrets.spreadsheet_id, range: Rails.application.secrets.spreadsheet_range })
     department ||= is_government == false ? 'Non government' : '(not set)'
-    value_range = Google::Apis::SheetsV4::ValueRange.new(values: [[api_key, department, non_gov_use_category ? "Non-Government - #{non_gov_use_category.humanize}" : 'Government']])
+    value_range = Google::Apis::SheetsV4::ValueRange.new(values: [[api_key, department, !is_government ? "Non-Government - #{non_gov_use_category.humanize}" : 'Government']])
     @service.append_spreadsheet_value(options[:spreadsheet_id], options[:range], value_range, value_input_option: 'RAW')
   end
 end
