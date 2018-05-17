@@ -3,9 +3,9 @@ class DownloadUsersController < ApplicationController
     @download_user = DownloadUser.new(download_user_params)
 
     if @download_user.save
-      render json: @user, status: :created
+      render json: @download_user, status: :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: @download_user.errors, status: :unprocessable_entity
     end
   end
 
