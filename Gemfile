@@ -46,3 +46,8 @@ group :test do
   gem 'faker'
   gem 'database_cleaner'
 end
+
+group :production do
+  gem 'lograge', '~> 0.10.0'
+  gem 'logstash-event', '~> 1.2'
+end

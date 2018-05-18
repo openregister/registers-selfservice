@@ -9,3 +9,5 @@ applications:
     - registers-selfservice
     # environment variables
     - registers-selfservice-secrets
+    # logging
+    - logit-ssl-drain
