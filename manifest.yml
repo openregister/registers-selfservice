@@ -4,6 +4,8 @@ applications:
   memory: 256MB
   instances: 1
   buildpack: ruby_buildpack
+  health-check-type: http
+  health-check-http-endpoint: /health_check/standard
   services:
     # postgres database
     - registers-selfservice

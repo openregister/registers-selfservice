@@ -50,4 +50,5 @@ end
 group :production do
   gem 'lograge', '~> 0.10.0'
   gem 'logstash-event', '~> 1.2'
+  gem 'health_check', '~> 3.0'
 end

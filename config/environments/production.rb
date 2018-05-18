@@ -73,7 +73,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   config.lograge.enabled = true
-
+  config.lograge.ignore_actions = ["HealthCheck::HealthCheckController#index"]
   config.lograge.formatter = Lograge::Formatters::Logstash.new
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
@@ -81,7 +81,6 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::Logger.new(STDOUT)
   end
-
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
