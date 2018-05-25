@@ -4,6 +4,7 @@ class DownloadUsersController < ApplicationController
 
     if @download_user.save
       render json: @download_user, status: :created
+      NotifyMailer.register_download_confirmation(@download_user).deliver_later
     else
       render json: @download_user.errors, status: :unprocessable_entity
     end
