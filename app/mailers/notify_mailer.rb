@@ -21,15 +21,4 @@ class NotifyMailer < GovukNotifyRails::Mailer
 
     mail(to: 'registerteam@digital.cabinet-office.gov.uk')
   end
-
-  def register_download_confirmation(download_user)
-    set_template('67a7d2f9-3faf-431a-a2a1-812f40a72e22')
-
-    set_personalisation(
-      register_name: download_user.register.capitalize,
-      register_download_link: "https://www.registers.service.gov.uk/registers/#{download_user.register.parameterize}/download-csv"
-    )
-
-    mail(to: download_user.email)
-  end
 end
