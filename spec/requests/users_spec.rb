@@ -19,17 +19,5 @@ RSpec.describe 'Users API', type: :request do
         expect(response).to have_http_status(201)
       end
     end
-
-    context 'when the request is invalid' do
-      before { post '/users', params: { email: nil }, headers: headers }
-
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
-      end
-
-      it 'returns a validation failure message' do
-        expect(response.body).to include("can't be blank")
-      end
-    end
   end
 end
