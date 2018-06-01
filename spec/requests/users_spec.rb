@@ -6,7 +6,7 @@ RSpec.describe 'Users API', type: :request do
   let(:headers) { { 'Authorization' => ActionController::HttpAuthentication::Basic.encode_credentials(Rails.application.secrets.http_auth_username, Rails.application.secrets.http_auth_password) } }
 
   describe 'POST /users' do
-    let(:valid_attributes) { { email: 'admin@gov.uk' } }
+    let(:valid_attributes) { { email: 'admin@gov.uk', contactable: true } }
 
     context 'when the request is valid' do
       before { post '/users', params: valid_attributes, headers: headers }
