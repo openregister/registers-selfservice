@@ -19,7 +19,7 @@ RSpec.describe 'Users API', type: :request do
         expect(response).to have_http_status(201)
       end
 
-      context 'when the request is invalid' do
+      context 'when contactable not specified' do
         before { post '/users', params: { is_government: true, contactable: nil }, headers: headers }
 
         it 'returns status code 422' do
@@ -28,6 +28,18 @@ RSpec.describe 'Users API', type: :request do
 
         it 'returns a validation failure message' do
           expect(response.body).to include("is not included in the list")
+        end
+      end
+
+      context 'when email not specified for government user' do
+        before { post '/users', params: { is_government: true, email: nil, contactable: true }, headers: headers }
+
+        it 'returns status code 422' do
+          expect(response).to have_http_status(422)
+        end
+
+        it 'returns a validation failure message' do
+          expect(response.body).to eq("{\"email\":[\"can't be blank\"]}")
         end
       end
     end

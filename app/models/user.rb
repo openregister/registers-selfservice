@@ -4,6 +4,7 @@ class User < ApplicationRecord
   before_save :set_api_key
   nilify_blanks
   validates :contactable, inclusion: { in: [true, false] }
+  validates :email, presence: true, if: -> { is_government == true }
   include ModelHelpers
 
 private
