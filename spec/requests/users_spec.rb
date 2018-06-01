@@ -18,6 +18,18 @@ RSpec.describe 'Users API', type: :request do
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
       end
+
+      context 'when the request is invalid' do
+        before { post '/users', params: { is_government: true, contactable: nil }, headers: headers }
+
+        it 'returns status code 422' do
+          expect(response).to have_http_status(422)
+        end
+
+        it 'returns a validation failure message' do
+          expect(response.body).to include("is not included in the list")
+        end
+      end
     end
   end
 end
