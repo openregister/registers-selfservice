@@ -3,7 +3,8 @@ require 'register_client_manager'
 class User < ApplicationRecord
   before_save :set_api_key
   nilify_blanks
-  validates :email, presence: true
+  validates :contactable, inclusion: { in: [true, false] }
+  validates :email, presence: true, if: -> { is_government == true }
   include ModelHelpers
 
 private

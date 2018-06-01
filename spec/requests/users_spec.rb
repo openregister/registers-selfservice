@@ -6,7 +6,7 @@ RSpec.describe 'Users API', type: :request do
   let(:headers) { { 'Authorization' => ActionController::HttpAuthentication::Basic.encode_credentials(Rails.application.secrets.http_auth_username, Rails.application.secrets.http_auth_password) } }
 
   describe 'POST /users' do
-    let(:valid_attributes) { { email: 'admin@gov.uk' } }
+    let(:valid_attributes) { { email: 'admin@gov.uk', contactable: true } }
 
     context 'when the request is valid' do
       before { post '/users', params: valid_attributes, headers: headers }
@@ -18,17 +18,29 @@ RSpec.describe 'Users API', type: :request do
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
       end
-    end
 
-    context 'when the request is invalid' do
-      before { post '/users', params: { email: nil }, headers: headers }
+      context 'when contactable not specified' do
+        before { post '/users', params: { is_government: true, contactable: nil }, headers: headers }
 
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
+        it 'returns status code 422' do
+          expect(response).to have_http_status(422)
+        end
+
+        it 'returns a validation failure message' do
+          expect(response.body).to include("is not included in the list")
+        end
       end
 
-      it 'returns a validation failure message' do
-        expect(response.body).to include("can't be blank")
+      context 'when email not specified for government user' do
+        before { post '/users', params: { is_government: true, email: nil, contactable: true }, headers: headers }
+
+        it 'returns status code 422' do
+          expect(response).to have_http_status(422)
+        end
+
+        it 'returns a validation failure message' do
+          expect(response.body).to eq("{\"email\":[\"can't be blank\"]}")
+        end
       end
     end
   end
