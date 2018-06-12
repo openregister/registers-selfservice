@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   context 'is a government user' do
     before { allow(subject).to receive(:is_government).and_return(true) }
-    it { should validate_presence_of(:email)}
+    it { should validate_presence_of(:email) }
     it { should validate_inclusion_of(:contactable).in_array([true, false]) }
   end
 
