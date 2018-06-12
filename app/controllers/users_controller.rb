@@ -8,7 +8,6 @@ class UsersController < ApplicationController
       render json: @user, status: :created
       if @user.email.present?
         NotifyMailer.api_key_confirmation(@user).deliver_later
-        NotifyMailer.new_api_key_request(@user).deliver_later
       end
     else
       render json: @user.errors, status: :unprocessable_entity

@@ -8,17 +8,4 @@ class NotifyMailer < GovukNotifyRails::Mailer
 
     mail(to: user.email)
   end
-
-  def new_api_key_request(user)
-    set_template('926a72b2-1332-4e88-a322-adee7c522203')
-
-    set_personalisation(
-      email: user.email,
-      api_key: user.api_key,
-      department: user.department_name,
-      non_gov_use_category: user.non_gov_use_category
-    )
-
-    mail(to: 'registerteam@digital.cabinet-office.gov.uk')
-  end
 end
