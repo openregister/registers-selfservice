@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
+    is_government true
     email { Faker::Internet.email }
-    non_gov_use_category 'Personal'
     department { Faker::Company.name }
     contactable true
   end

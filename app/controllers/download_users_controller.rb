@@ -1,6 +1,7 @@
 class DownloadUsersController < ApplicationController
   def create
-    @download_user = DownloadUser.new(download_user_params)
+    @download_user = User.new(user_params)
+    @download_user.contactable = true
 
     if @download_user.save
       render json: @download_user, status: :created
@@ -11,7 +12,7 @@ class DownloadUsersController < ApplicationController
 
 private
 
-  def download_user_params
-    params.permit(:email, :non_gov_use_category, :department, :is_government, :register)
+  def user_params
+    params.permit(:email, :non_gov_use_category, :department, :api_key, :is_government, :contactable, :register)
   end
 end
