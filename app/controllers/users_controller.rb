@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.api_key = SecureRandom.uuid
+    @user.user_type = :api
 
     if @user.save
       #TODO Mock out Google Auth for end-to-end tests
@@ -19,6 +20,6 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.permit(:email, :non_gov_use_category, :department, :api_key, :is_government, :contactable, :register)
+    params.permit(:email, :non_gov_use_category, :department, :api_key, :is_government, :contactable)
   end
 end

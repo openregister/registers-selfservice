@@ -1,6 +1,7 @@
 class DownloadUsersController < ApplicationController
   def create
     @download_user = User.new(user_params)
+    @download_user.user_type = :download
     @download_user.contactable = true
 
     if @download_user.save
