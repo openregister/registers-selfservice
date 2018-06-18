@@ -8,7 +8,7 @@ class MoveDownloadUsersToUsers < ActiveRecord::Migration[5.1]
         department: download_user.department,
         is_government: download_user.is_government,
         api_key: nil,
-        contactable: false
+        contactable: download_user.created_at.between?(Time.utc(2018, 0o5, 30, 18), Time.now)
       )
     end
   end
