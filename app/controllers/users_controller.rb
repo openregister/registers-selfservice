@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
+    @user.api_key = SecureRandom.uuid
+    @user.user_type = :api
 
     if @user.save
       #TODO Mock out Google Auth for end-to-end tests

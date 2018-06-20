@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Download Users API', type: :request do
-  let!(:download_users) { create_list(:user, 10) }
-  let(:user_id) { download_users.first.id }
+  let!(:users) { create_list(:user, 10) }
+  let(:user_id) { users.first.id }
   let(:headers) { { 'Authorization' => ActionController::HttpAuthentication::Basic.encode_credentials(Rails.application.secrets.http_auth_username, Rails.application.secrets.http_auth_password) } }
 
   describe 'POST /download_users' do
-    let(:valid_attributes) { { email: 'admin@gov.uk' } }
+    let(:valid_attributes) { { email: 'admin@gov.uk', contactable: true } }
 
     context 'when the request is valid' do
       before { post '/download_users', params: valid_attributes, headers: headers }
@@ -21,7 +21,7 @@ RSpec.describe 'Download Users API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/download_users', params: { email: nil }, headers: headers }
+      before { post '/download_users', params: { email: nil, is_government: true }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
