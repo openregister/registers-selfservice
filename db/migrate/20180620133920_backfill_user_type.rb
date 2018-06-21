@@ -1,6 +1,11 @@
 class BackfillUserType < ActiveRecord::Migration[5.1]
   def change
-    User.where(user_type: nil).where.not(api_key: nil).update_all(user_type: :api)
-    User.where(api_key: nil, user_type: nil).update_all(user_type: :download)
+    User.where(user_type: nil).find_each do |u|
+      if u.api_key.present?
+        u.update(user_type: :api)
+      else
+        u.update(user_type: :download)
+      end
+    end
   end
 end
