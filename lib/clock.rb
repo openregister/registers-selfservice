@@ -7,7 +7,11 @@ module Clockwork
     system(job)
   end
 
-  every(1.day, 'ApiKeyRetentionJob') {
-    ApiKeyRetentionJob.perform_later
+  every(1.day, 'ApiKeyInactiveDeletionJob') {
+    ApiKeyInactiveDeletionJob.perform_later
+  }
+
+  every(1.day, 'ApiKeyInactiveWarningJob') {
+    ApiKeyInactiveWarningJob.perform_later
   }
 end
