@@ -12,10 +12,10 @@ class ApiKeyInactiveWarningJob < ApplicationJob
                                                 .where("created_at <= :date", date: activity_period)
                                                 .pluck(:api_key)
     inactive_api_keys = api_keys_older_than_activity_period - active_api_keys
-  
+
     users_to_warn = User.where(api_key: inactive_api_keys, sent_warning_email: false)
     users_to_warn.map { |u|
-      NotifyMailer.api_key_inactive_warning(u).deliver_later 
+      NotifyMailer.api_key_inactive_warning(u).deliver_later
       u.update(sent_warning_email: true)
     }
   end

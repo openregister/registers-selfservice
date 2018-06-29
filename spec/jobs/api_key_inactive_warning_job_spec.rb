@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ApiKeyInactiveWarningJob, type: :job do
-
   it 'emails inactive users' do
     user = create(:user, created_at: 2.years.ago, user_type: 'api', api_key: SecureRandom.uuid)
     allow(GoogleAnalyticsQueries).to receive(:get_active_api_keys).and_return([])
@@ -29,5 +28,4 @@ RSpec.describe ApiKeyInactiveWarningJob, type: :job do
     ApiKeyInactiveWarningJob.perform_now
     expect(User.find(user.id).sent_warning_email).to eq(false)
   end
-
 end
