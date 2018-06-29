@@ -6,7 +6,7 @@ module GoogleAnalyticsQueries
 
 module_function
 
-  def get_active_api_keys_from_ga(start_date)
+  def get_active_api_keys(start_date)
     authorization = ServiceAccountCredentials.make_creds(
       json_key_io: StringIO.new(Base64.decode64(Rails.application.secrets.google_api_key)),
       scope: [Google::Apis::AnalyticsreportingV4::AUTH_ANALYTICS_READONLY]

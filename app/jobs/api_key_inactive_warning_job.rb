@@ -5,7 +5,7 @@ class ApiKeyInactiveWarningJob < ApplicationJob
 
   def perform
     activity_period = 11.months.ago
-    active_api_keys = GoogleAnalyticsQueries.get_active_api_keys_from_ga(activity_period)
+    active_api_keys = GoogleAnalyticsQueries.get_active_api_keys(activity_period)
     User.where(api_key: active_api_keys).update_all(sent_warning_email: false)
     api_keys_older_than_activity_period = User.where(user_type: 'api')
                                                 .where.not(email: nil)

@@ -4,7 +4,7 @@ class ApiKeyInactiveDeletionJob < ApplicationJob
   queue_as :default
 
   def perform
-    active_api_keys = GoogleAnalyticsQueries.get_active_api_keys_from_ga(1.year.ago)
+    active_api_keys = GoogleAnalyticsQueries.get_active_api_keys(1.year.ago)
     api_keys_older_than_retention_period = User.where(user_type: 'api')
                                                 .where.not(email: nil)
                                                 .where("created_at <= :date", date: 1.year.ago)
