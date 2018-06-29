@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625100434) do
+ActiveRecord::Schema.define(version: 20180629111912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20180625100434) do
     t.boolean "contactable"
     t.string "register"
     t.integer "user_type"
+    t.boolean "sent_warning_email", default: false
   end
 
 end
