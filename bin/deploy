@@ -1,13 +1,28 @@
 #!/usr/bin/env bash
 set -e
 
-APP_NAME=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); puts config['applications'][0]['name']")
-
+SINGLE_INSTANCE_APPS=(registers-selfservice-queue registers-selfservice-scheduler)
+ZERO_DOWNTIME_APPS=registers-selfservice
 # $CF env variables are set by Travis and configured in ../.travis.yml
 cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
 
 echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
 # Zero downtime push comes from "Autopilot" which is installed in before_deploy
 # step in Travis
-cf zero-downtime-push $APP_NAME -f manifest.yml
-cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
+
+for APP_NAME in $ZERO_DOWNTIME_APPS
+do
+  echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
+  # Zero downtime push comes from "Autopilot" which is installed in before_deploy
+  # step in Travis
+  cf zero-downtime-push $APP_NAME -f manifest.yml
+  cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
+done
+
+for APP_NAME in ${SINGLE_INSTANCE_APPS[@]}
+do
+  echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
+  # We do not want multiple instances of these apps running so use CF PUSH
+  cf push $APP_NAME -f manifest.yml
+  cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
+done

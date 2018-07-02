@@ -1,11 +1,8 @@
 ---
-applications:
-- name: registers-selfservice
+defaults: &defaults
   memory: 256MB
   instances: 1
   buildpack: ruby_buildpack
-  health-check-type: http
-  health-check-http-endpoint: /health_check/standard
   services:
     # postgres database
     - registers-selfservice
@@ -13,3 +10,19 @@ applications:
     - registers-selfservice-secrets
     # logging
     - logit-ssl-drain
+
+    applications:
+      - name: registers-selfservice
+        <<: defaults
+        health-check-type: http
+        health-check-http-endpoint: /health_check/standard
+      - name: registers-selfservice-scheduler
+        <<: defaults
+        health-check-type: process
+        command: bundle exec clockwork 'lib/clock.rb'
+      - name: registers-selfservice-queue
+        <<: defaults
+        health-check-type: process
+        command: bundle exec 'rake environment jobs:work'
+
+    
