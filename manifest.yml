@@ -14,6 +14,7 @@ defaults: &defaults
 applications:
   - name: registers-selfservice
     <<: *defaults
+    instances: 2
     health-check-type: http
     health-check-http-endpoint: /health_check/standard
   - name: registers-selfservice-scheduler
